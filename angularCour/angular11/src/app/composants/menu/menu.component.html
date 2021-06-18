@@ -1,0 +1,27 @@
+<ul>
+  <li routerLinkActive=active [routerLinkActiveOptions]="{ exact: true }"><a routerLink=''> Accueil </a></li>
+  <li routerLinkActive=active><a routerLink='stagiaire'> Stagiaire </a></li>
+  <li>
+    <a [routerLink]='lienStagiaire'> lienStagiaire </a>
+  </li>
+  <li>
+    <a routerLink='{{lienStagiaire}}'> lienStagiaire </a>
+  </li>
+  <li>
+    <a [routerLink]='["/stagiaire", param1, param2]'> Stagiaire avec paramètres (sol 3) </a>
+</li>
+<li>
+        <a [routerLink]="['/adresse']" [queryParams]="{ ville: 'Marseille',   codePostal: '13000', rue: 'paradis'}">
+            Adresse avec param
+        </a>
+  <li routerLinkActive=active><a routerLink='adresse'> Adresse </a></li>
+  <li routerLinkActive=active><a routerLink='adresse'> lienTableau </a></li>
+  <li routerLinkActive=active><a routerLink='formulaire'> formulaire </a></li>
+  <li routerLinkActive=active><a routerLink='form'> forms </a></li>
+  <li routerLinkActive=active><a routerLink='calculette-group'> calculette-group </a></li>
+  <li routerLinkActive=active><a routerLink='livre'> Créer Livre </a></li>
+  <li routerLinkActive=active><a routerLink='personne'> Personne </a></li>
+  <li routerLinkActive=active><a routerLink='liv'> Afficher Livre </a></li>
+  <li routerLinkActive=active><a routerLink='connexion'> Connexion</a></li>
+  
+</ul>

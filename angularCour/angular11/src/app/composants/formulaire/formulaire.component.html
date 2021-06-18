@@ -1,0 +1,19 @@
+<p>formulaire works!</p>
+<form #monForm=ngForm (ngSubmit)='ajouterPersonne()'>
+    <div>
+        Nom : <input type=text name=nom [(ngModel)]='personne.nom' required #nom=ngModel>
+    </div>
+    <span [hidden]="nom.valid || nom.pristine" >Le nom est obligatoire</span>
+    <div>
+        Prénom : <input type=text name=prenom [(ngModel)]='personne.prenom' required #prenom=ngModel>
+    </div>
+    <span [hidden]="prenom.valid || prenom.pristine" >Le prenom est obligatoire</span>
+    <div>
+        <button (click)="afficherTout()" [disabled]="!monForm.valid">Ajouter</button>
+    </div>
+</form>
+<ul>
+    <ng-container *ngFor="let perso of personnes">
+        <li>{{ perso.nom }}--{{ perso.prenom }}</li>
+    </ng-container>
+</ul>

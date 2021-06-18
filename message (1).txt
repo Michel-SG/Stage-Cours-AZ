@@ -1,0 +1,70 @@
+<h3>Gestion de livres</h3>
+
+<form [formGroup]="livreForm" (ngSubmit)="ajouterLivre()">
+    <div>
+        ISBN : <input type="text" formControlName="isbn">
+    </div>
+    <div>
+        Titre : <input type="text" formControlName="titre">
+    </div>
+    <div>
+        Nombre de pages : <input type="number" formControlName="nbrPages">
+    </div>
+    <div formArrayName="motsCles">
+        <h4>Liste de mots-clés</h4>
+        <ng-container *ngFor="let motCle of motsCles.controls; let i=index">
+            <input type="text" [formControlName]="i">
+        </ng-container>
+        <button type=button (click)="ajouterMotCle()">Ajouter un mot-clé</button>
+    </div>
+    <div formArrayName="auteurs">
+        <h4>Liste d'auteurs</h4>
+        <div *ngFor="let auteur of auteurs.controls; let j=index">
+            <div [formGroupName]="j">
+                <div>
+                    Nom : <input type="text" formControlName="nom">
+                    <span *ngIf="nom(j).errors?.required">
+                        Le nom est obligatoire
+                    </span>
+                </div>
+                <div>
+                    Prenom : <input type="text" formControlName="prenom">
+                </div>
+
+            </div>
+        </div>
+        <button type=button (click)="ajouterAuteur()">Ajouter un auteur</button>
+    </div>
+    <button [disabled]="!livreForm.valid" class="btn btn-success">Ajouter un nouveau livre</button>
+</form>
+<h3>Liste de livres</h3>
+<table style='border: 1px solid black'>
+    <tr>
+        <th>Isbn</th>
+        <th>titre</th>
+        <th>Nombre de pages</th>
+        <th>Mots-clés</th>
+        <th>Auteurs</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let livre of livres; let indice = index">
+        <td> {{livre.isbn}}</td>
+        <td> {{livre.titre}}</td>
+        <td> {{livre.nbrPages}}</td>
+        <td>
+            <ng-container *ngFor="let elt of livre.motsCles">
+                {{ elt }},
+            </ng-container>
+        </td>
+        <td>
+            <ng-container *ngFor="let elt of livre.auteurs">
+                {{ elt.nom | uppercase }} {{ elt.prenom | titlecase }},
+            </ng-container>
+        </td>
+        <td>
+            <button (click)="supprimerLivre(livre.isbn)">Supprimer</button>
+            <a [routerLink]="['/editLivre',livre.isbn]">Modifier</a>
+        </td>
+    </tr>
+
+</table>

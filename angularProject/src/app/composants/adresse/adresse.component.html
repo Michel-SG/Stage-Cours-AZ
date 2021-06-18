@@ -1,0 +1,10 @@
+<p>adresse works!</p>
+
+Now, in templates, developers can use the new syntax to simplify complex
+conditionals using nullish coalescing operator (??).For instance:
+
+{{ price !==null && price !== undefined ? price: calculatePrice() }}
+
+Becomes:
+
+{{ price ?? calculatePrice() }} 

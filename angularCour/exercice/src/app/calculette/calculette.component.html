@@ -1,0 +1,12 @@
+
+    <label for='value1'>value1</label>
+    <input type='number' id='value1' name='value1' [(ngModel)]='value1' required ><br><br>
+    <label for='value2'>value2</label>
+    <input type='number' id='value2' name='value2' [(ngModel)]='value2' required ><br><br><br>
+    <button (click)='plus()'>Ajouter</button><br><br>
+    <button (click)='moins()'>Ajouter</button><br><br>
+    <button (click)='fois()'>Ajouter</button><br><br>
+    <button (click)='div()'>Ajouter</button><br><br>
+
+    <p>{{ operateur }} donne : {{ result }}</p>
+

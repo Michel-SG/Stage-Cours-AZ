@@ -1,0 +1,71 @@
+<h2>Créer un livre</h2>
+<form [formGroup]="livreForm" (ngSubmit)='afficherTout()'>
+    <div>
+        <label for='isbn'> isbn :</label>
+        <input type="text" id='isbn' formControlName="isbn">
+    </div>
+    <div>
+        <label for='titre'> Titre :</label>
+        <input type="text" id='titre' formControlName="titre">
+    </div>
+    <div>
+        <label for='nbrPage'> NbrPage :</label>
+        <input type="number" id='nbrPage' formControlName="nbrPage">
+    </div>
+
+    <div formArrayName="motsCles" class="motcles">
+        <h3>Mots-clés </h3>
+
+        <div *ngFor="let mot of motsCles.controls; let i=index">
+            <div>
+                <label for='motcles'> Mots-clés :</label>
+                <input type="text" id='motcles' [formControlName]="i">
+            </div>
+        </div>
+        <button type=button (click)="ajouterMotCle()">
+            Ajouter mots-clés
+        </button>
+    </div>
+    <ng-container formArrayName='auteurs' class='auteur'>
+        <h3>Auteur </h3>
+        <button type=button (click)="ajouterAuteur()">
+            Ajouter auteur
+        </button>
+        <div *ngFor="let aut of auteurs.controls; let it=index" [formGroupName]="it">
+            <div>
+                <label for='nom'> Nom :</label>
+                <input type="text" id='prenom' formControlName="nom">
+            </div>
+            <div>
+                <label for='prenom'> Prénom :</label>
+                <input type="text" id='prenom' formControlName="prenom">
+            </div>
+        </div>
+
+    </ng-container>
+    <button type='submit' [disabled]="!livreForm.valid">Envoyer le formulaire</button>
+</form>
+<h3>Afficher la liste de livres</h3>
+
+<ul>
+    <ng-container *ngFor="let elt of livres; let i=index">
+        <li *ngIf="i == 0; then si else sinon"></li>
+            <ng-template #si>
+            <li class='livre'>Auteur n°{{ 1 }}</li>
+            </ng-template>
+            <ng-template #sinon>
+            <li class='livre'>Auteur n°{{ i+1 }}</li>
+            </ng-template>
+        <li>Isbn: {{ elt.isbn }}</li>
+        <li>Titre: {{ elt.titre }} {{elt.titre}}</li>
+        <li>Nombre de pages: {{ elt.nbrPage }}</li>
+
+        <ng-container *ngFor="let mots of elt.motsCles">
+            <li>Mot-clé : {{ mots }}</li>
+        </ng-container>
+        <ng-container *ngFor="let autor of elt.auteurs">
+            <li>Auteur : {{ autor.prenom }} {{ autor.nom }}</li>
+        </ng-container>
+        <button (click)='supprimer(i)'>supprimer cet auteur</button>
+    </ng-container>
+</ul>

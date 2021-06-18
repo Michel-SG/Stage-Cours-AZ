@@ -1,0 +1,37 @@
+<h3>Modification de livres</h3>
+
+<form [formGroup]="livreForm" (ngSubmit)="modifierLivre()">
+    <div>
+        ISBN : <input type="text" formControlName="isbn">
+    </div>
+    <div>
+        Titre : <input type="text" formControlName="titre">
+    </div>
+    <div>
+        Nombre de pages : <input type="number" formControlName="nbrPage">
+    </div>
+    <div formArrayName="motsCles">
+        <h4>Liste de mots-clés</h4>
+        <ng-container *ngFor="let motCle of motsCles.controls; let i=index">
+            <input type="text" [formControlName]="i">
+        </ng-container>
+        <button type=button (click)="ajouterMotCle()">Ajouter un mot-clé</button>
+    </div>
+    <div formArrayName="auteurs">
+        <h4>Liste d'auteurs</h4>
+        <div *ngFor="let auteur of auteurs.controls; let j=index">
+            <div [formGroupName]="j">
+                <div>
+                    Nom : <input type="text" formControlName="nom">
+
+                </div>
+                <div>
+                    Prenom : <input type="text" formControlName="prenom">
+                </div>
+
+            </div>
+        </div>
+        <button type=button (click)="ajouterAuteur()">Ajouter un auteur</button>
+    </div>
+    <button [disabled]="!livreForm.valid" class="btn btn-success">Enregistrer modification</button>
+</form>

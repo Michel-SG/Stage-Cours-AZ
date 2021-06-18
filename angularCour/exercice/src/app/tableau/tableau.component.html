@@ -1,0 +1,7 @@
+<p>{{ tableau[indice] }}</p>
+<ul>
+    <li><a [routerLink]="['/tableau',next]">suivant</a></li>
+    <li><a [routerLink]="['/tableau',previous]">précédent</a></li>
+    <button (click)="suivant()">Next</button>
+    <button (click)="precedent()">previous</button>
+</ul>

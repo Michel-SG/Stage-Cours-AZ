@@ -1,0 +1,104 @@
+<p>form works!</p>
+
+<form [formGroup]="personneForm" (ngSubmit)='afficherTout()'>
+    <div>
+        Identifiant : <input type="number" formControlName="id">
+    </div>
+    <div>
+        Nom : <input type="text" formControlName="nom">
+    </div>
+    <div>
+        Prénom : <input type="text" formControlName="prenom">
+    </div>
+    <div formGroupName="adresse">
+        <h3>Adresse</h3>
+        <div>
+            Rue : <input type="text" formControlName="rue">
+        </div>
+        <div>
+            Ville : <input type="text" formControlName="ville">
+        </div>
+        <div>
+            Code postal : <input type="text" formControlName="codePostal">
+        </div>
+    </div>
+    <div formArrayName="sports">
+        <h3>Sports </h3>
+        <button type=button (click)="ajouterSport()">
+            Ajouter sport
+        </button>
+        <div *ngFor="let sport of sports.controls; let i=index">
+            <div>
+                Sport :
+                <input type="text" [formControlName]="i">
+            </div>
+        </div>
+    </div>
+    <button type='submit'>Envoyer</button>
+</form>
+
+<h3>Liste de personnes</h3>
+
+<ul>
+    <li *ngFor="let elt of personnes; let i=index">
+        {{ elt.prenom }} {{ elt.nom }} {{elt.adresse.rue}} {{elt.adresse.codePostal}} {{ elt.adresse.ville }}
+        <ng-container *ngFor="let sport of elt.sports">
+            {{ sport }}
+        </ng-container>
+        <button (click)='supprimer(i)'>supprimer</button> 
+    </li>
+</ul>
+
+<!-- <form [formGroup]="personneForm" (ngSubmit)='afficherTout()'>
+    <div>
+        Identifiant :
+        <input type="number" formControlName="id">
+    </div>
+    <div *ngIf="id?.invalid && (id?.dirty || id?.touched)">
+        <div *ngIf="id?.errors?.required">L'identifiant est obligatoire</div>
+    </div>
+    <div>
+        Nom :
+        <input type="text" formControlName="nom">
+    </div>
+    <div *ngIf="nom?.invalid && (nom?.dirty || nom?.touched)">
+        <div *ngIf="nom?.errors?.required">Le nom est obligatoire</div>
+        <div *ngIf="nom?.errors?.pattern">Première lettre en majuscule et min 3 lettres max 11</div>
+    </div>
+    <div>
+        Prénom :
+        <input type="text" formControlName="prenom">
+    </div>
+    <div *ngIf="prenom?.invalid && (prenom?.dirty || prenom?.touched)">
+        <div *ngIf="prenom?.errors?.required">Le prénom est obligatoire</div>
+        <div *ngIf="prenom?.errors?.erreur">Première lettre en majuscule</div>
+    </div>
+    <button type='submit' [disabled]='!personneForm.valid'>Envoyer</button>
+</form> -->
+
+<!-- <div>
+    Nom: <input type='test' [formControl]='nom'>
+</div>
+<button (click)="affichernom()">Afficher</button> -->
+
+<!-- <form [formGroup]="personneForm" (ngSubmit)='afficherTout()'>
+    <div>
+        Identifiant :
+        <input type="number" formControlName="id">
+    </div>
+    <div>
+        Nom :
+        <input type="text" formControlName="nom">
+    </div>
+    <div>
+        Prénom :
+        <input type="text" formControlName="prenom">
+    </div>
+    <button type='submit' [disabled]='!personneForm.valid'>cliquer</button>
+</form>
+<ul>
+    <ng-container *ngFor="let person of personnes">
+        <li>nom : {{ person.nom }}</li>
+        <li>prenom : {{ person.prenom }}</li>
+    </ng-container>
+</ul> -->

@@ -1,0 +1,38 @@
+
+<form #monForm=ngForm (ngSubmit)=ajouterPersonne()>
+    <!-- <div>
+        Identifiant : <input type=text name=id [(ngModel)]=personne.num required #id=ngModel>
+        <span [hidden]="id.valid || id.pristine">
+            L'identifiant' est obligatoire
+        </span>
+    </div> -->
+    <div>
+        Nom : <input type=text name=nom [(ngModel)]=personne.nom required #nom=ngModel>
+        <span [hidden]="nom.valid || nom.pristine">
+            Le nom est obligatoire
+        </span>
+    </div>
+
+    <div>
+        Prénom : <input type=text name=prenom [(ngModel)]=personne.prenom required #prenom=ngModel>
+        <span [hidden]="prenom.valid || prenom.pristine">
+            Le prénom est obligatoire
+        </span>
+    </div>
+    <div>
+        <button [disabled]="!monForm.valid">
+            Ajouter
+        </button>
+    </div>
+</form>
+
+<h3>Liste de personnes</h3>
+<ul>
+    <ng-container *ngFor="let p of personnes; let i = index">
+        {{ p.prenom }} {{ p.nom }}
+        <button class="btn btn-link" (click)="supprimer(p.num)"><i class="far fa-trash-alt"></i></button>
+        <button class="btn btn-link" [routerLink]="['/editPersonne/', p.num]"><i class="fas fa-edit edit"></i>éditer</button>
+    </ng-container>
+</ul>
+
+<p class="mb-5">personne works!  </p>

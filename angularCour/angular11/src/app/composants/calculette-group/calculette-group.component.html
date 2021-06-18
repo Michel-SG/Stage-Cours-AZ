@@ -1,0 +1,14 @@
+<p>calculette-group works!</p>
+<form [formGroup]="personneForm" (ngSubmit)='afficherTout()'>
+    <div>
+        value1 : <input type="number" formControlName="value1">
+    </div>
+    <div>
+        value2 : <input type="number" formControlName="value2">
+    </div>
+
+    <button type='submit'>Envoyer</button>
+</form>
+
+<h3>Résultat</h3>
+{{ valeur1 }} {{op}} {{ valeur2 }} = {{ result }}

@@ -1,0 +1,17 @@
+<p>livre works!</p>
+{{livres | json}}
+<ul>
+    <ng-container *ngFor="let livre of livres">
+        <li>{{livre.titre}}</li>
+        <li>{{livre.isbn}}</li>
+        <li>{{livre.nbrPage}}</li>
+        <!-- <li>{{livre.auteurs | json}}</li> -->
+        <!-- <li *ngFor="let auteur of livre.auteurs">{{auteur | json}}</li> -->
+    <ng-container *ngFor="let auteur of livre.auteurs">
+        <li>{{auteur.nom}}</li>
+         <li>{{auteur.prenom}}</li> 
+    </ng-container>
+        <button (click)="delete(livre.isbn)">supprimer</button>
+        <a [routerLink]="['/editLivre',livre.isbn]">Modifier</a>
+    </ng-container>
+</ul>

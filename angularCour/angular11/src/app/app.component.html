@@ -1,0 +1,206 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#
+navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<p>pipe sans paramettre : {{ title | getCart:2 }}</p>
+<p>pipe sans paramettre : {{ title | subStr :1:3}}</p>
+<p>{{ tableau | subArray:1:3 }} => 5, 8</p>
+<p>{{ tableau | subArray:1 }} => 5, 8, 3</p>
+<p>{{ tableau | subArray }} => 2, 5, 8, 3</p>
+
+
+<app-menu></app-menu>
+<router-outlet></router-outlet>
+<app-observable></app-observable>
+<ul>
+  <li *ngFor="let elt of stagiaire | keyvalue">
+    {{elt.key}} : {{ elt.value }}
+  </li>
+</ul>
+<p>{{ tableau[0] }}</p>
+<p>{{ stagiaire.nom }}</p>
+{{ direBonjour() }}
+
+<ul>
+  <li *ngFor="let elt of tableau; let i = index; let isFirst = first">
+    {{ i }} :{{elt}}:{{ isFirst}}
+  </li>
+</ul>
+<ul *ngFor="let stagiaire of stagiaires">
+  <li>{{ stagiaire.nom}} {{stagiaire.prenom}}</li>
+
+</ul>
+<ul>
+  <ng-container *ngFor='let elt of tableau'>
+    <li *ngIf='elt % 2 == 0; else sinon' [ngClass]="{'rouge':elt % 2 == 0, 'bleu': elt % 2 !=
+   0}">{{ elt }} : pair</li>
+    <ng-template #sinon>
+      <li>{{ elt }} : impaire</li>
+    </ng-template>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor='let moyenne of moyennes'>
+    <li *ngIf='moyenne>=0 && moyenne<=9; then si else sinon'></li>
+    <ng-template #si>
+      <li>{{moyenne}} echec</li>
+    </ng-template>
+    <ng-template #sinon>
+      <li *ngIf='moyenne>=10 && moyenne<=13; else third'> {{ moyenne }} moyen </li>
+    </ng-template>
+    <ng-template #third>
+      <li *ngIf='moyenne>=14 && moyenne<=16; else four'>{{ moyenne }} bien</li>
+    </ng-template>
+    <ng-template #four>
+      <li>{{moyenne}} très bien</li>
+    </ng-template>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor='let moyenne of moyennes'>
+    <li *ngIf='moyenne>=0 && moyenne<=9; else sinon'>{{moyenne}}: échec</li>
+    <ng-template #sinon>
+      <li *ngIf='moyenne>=10 && moyenne<=13; else third'> {{ moyenne }} moyen </li>
+    </ng-template>
+    <ng-template #third>
+      <li *ngIf='moyenne>=14 && moyenne<=16; else four'>{{ moyenne }} bien</li>
+    </ng-template>
+    <ng-template #four>
+      <li>{{moyenne}} très bien</li>
+    </ng-template>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor="let elt of tableau">
+    <ng-container [ngSwitch]="elt">
+      <li *ngSwitchCase="1">
+        {{ elt }} = un
+      </li>
+      <li *ngSwitchCase="2">
+        {{ elt }} = deux
+      </li>
+      <li *ngSwitchCase="3">
+        {{ elt }} = trois
+      </li>
+      <li *ngSwitchDefault>
+        {{ elt }} : autre
+      </li>
+    </ng-container>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor="let moyenne of moyennes">
+    <ng-container [ngSwitch]="true">
+      <li *ngSwitchCase="moyenne>=0 && moyenne<=9 ">
+        {{ moyenne }} : Vous avez échoué
+      </li>
+      <li *ngSwitchCase="moyenne>=10 && moyenne<=13 ">
+        {{ moyenne }} : Vous êtes moyen
+      </li>
+      <li *ngSwitchCase="moyenne>=14 && moyenne<=16">
+        {{ moyenne }} : Bien joué
+      </li>
+      <li *ngSwitchDefault>
+        {{ moyenne }} : Vous êtes exellent
+      </li>
+    </ng-container>
+  </ng-container>
+</ul>
+
+<!-- <ul>
+  <ng-container *ngFor='let moyenne of moyennes'>
+    <ng-container [ngSwitch]="true">
+      <li *ngSwitchCase="elt < 3 ">
+        {{ elt }} inférieur à trois
+      </li>
+      <li *ngSwitchDefault>
+        {{ elt }} supérieur ou égal à trois
+      </li>
+    </ng-container>
+  </ng-container>
+ </ul> -->
+
+<p [ngStyle]='{backgroundColor: couleur}'>Mon paragraphe</p>
+<p [ngClass]='{"rouge": nom== "wick"}'>Mon deuxième paragraphe</p>
+<p [ngClass]='{"rouge": nom != "wicko", "bleu": nom == "wick"}'>Mon troixième paragraphe</p>
+<p [ngClass]="nom != 'wick' ? 'rouge' : 'bleu'">
+  {{ nom }}
+</p>
+
+<ul>
+  <ng-container *ngFor="let elt of tableau">
+    <li [ngClass]="{'rouge': elt % 2 == 0, 'bleu': elt % 2 !=0}">
+      {{ elt }}
+    </li>
+  </ng-container>
+</ul>
+<ul>
+  <li *ngFor="let personne of personnes; let i=index">
+    {{i}} {{personne.nom}} {{personne.prenom}}
+
+  </li>
+</ul>
+<ul>
+  <ng-container *ngFor="let personne of personnes; let i=index">
+    <li [ngClass]="i % 2 == 0 ? 'rouge':  'bleu'">
+      {{ personne.nom }}
+    </li>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor="let stagiaire of stagiaires; let i=index">
+    <li [ngClass]="{'rouge': i%2==0,  'bleu': i%2 !=0}">
+      {{i }} {{ stagiaire.nom }} {{ stagiaire.prenom }}
+    </li>
+  </ng-container>
+</ul>
+<ul>
+  <ng-container *ngFor="let stagiaire of stagiaires; let i=index">
+    <li [ngClass]="i % 2 == 0 ? 'rouge':  'bleu'">
+      {{i }} {{ stagiaire.nom }} {{ stagiaire.prenom }}
+    </li>
+  </ng-container>
+</ul>
+<span style="color: Tomato;">
+  <i class="fab fa-angular fa-7x"></i>
+</span>
+<i class="fab fa-angular fa-3x fa-rotate-90"></i>
+<i class="fas fa-camera"></i>
+<i class="fa fa-home fa-5x"></i>
+<i class="fa fa-home fa-5x fa-flip-horizontal"></i>
+<span style="color: skyblue;" class="fa-3x">
+  <i class="fas fa-stroopwafel fa-spin"></i>
+</span>

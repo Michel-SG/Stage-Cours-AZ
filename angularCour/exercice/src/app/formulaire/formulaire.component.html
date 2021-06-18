@@ -1,0 +1,24 @@
+<p>Le résultat est: {{ result}}</p>
+{{value1.value}}
+<form>
+    <label for='value1'>value1</label>
+    <input type='number' id='value1' name='value1' [(ngModel)]="valeur1" required #value1><br><br>
+    <label for='value2'>value2</label>
+    <input type='number' id='value2' name='value2' [(ngModel)]="valeur2" required><br><br><br>
+    <button (click)='calculer()' >Calculer</button>
+</form><br><br>
+<form  #f=ngForm>
+    <label for='nom'>nom</label>
+    <input type='text' id='nom' name='nom' [(ngModel)]="personne.nom" required ><br><br>
+    <label for='prenom'>prenom</label>
+    <input type='text' id='prenom' name='prenom' [(ngModel)]="personne.prenom" required #prenom><br><br><br>
+    <div [hidden]='prenom.invalid'>Le prénom est bobligatoire</div>
+    <button  [disabled]="!f.valid">Ajouter</button>
+</form><br><br>
+
+<ul>
+    <ng-container *ngFor='let perso of personnes'>
+        <li >{{perso.nom}}</li>
+        <li >{{perso.prenom}}</li>
+    </ng-container> 
+</ul>

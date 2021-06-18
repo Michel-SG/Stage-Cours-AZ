@@ -1,0 +1,7 @@
+<p>La valeur du tableau est : {{ tabs[indice] }}</p>
+<ul>
+    <li><a [routerLink]="['/tableau', next]">Suivant</a></li>
+    <li><a [routerLink]="['/tableau', previous]">Précédent</a></li>
+</ul>
+<button (click)="affichersuivant()">suivant</button>
+<button (click)="afficherPrecedant()">precedant</button>
