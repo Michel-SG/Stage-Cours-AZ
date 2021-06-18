@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Bienvenue dans mon site !</h1>
+        <hr />
+        <div>Je suis fait en HTML classique</div>
+        <hr />
+
+        <!-- Cette div contiendra mon application React -->
+        <div id="react-app"></div>
+
+        <hr />
+        <div>Je suis fait en HTML classique</div>
+
+        <script
+            src="https://unpkg.com/react@16/umd/react.development.js"
+            crossorigin
+        ></script>
+        <script
+            src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+            crossorigin
+        ></script>
+
+        <script>
+            'use strict';
+            const e = React.createElement;
+            function MyFirstComponent() {
+                const message = 'Je suis fait en React ! Cliquer moi ! :)';
+                return e(
+                    'div',
+                    { onClick: () => alert('Vous avez cliqué sur le texte !') },
+                    message
+                );
+            }
+            const domContainer = document.querySelector('#react-app');
+            ReactDOM.render(e(MyFirstComponent), domContainer);
+        </script>
+        <!-- Script utilisant React... -->
+    </body>
+</html>
